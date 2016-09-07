@@ -1,0 +1,64 @@
+    #include<stdio.h>
+    #include<string.h>
+    	int star(int sudoku[9][9]);
+    	int zqd_gr(int sudoku[9][9],int o);
+    	int main(){
+    		int test;
+    		scanf("%d",&test);
+    		int sudoku[9][9];
+    		while (test--){
+    			for (int i = 0;i < 9;i++){
+    				for (int j = 0;j < 9;j++){
+    					scanf("%d",&sudoku[i][j]);
+    				}
+    			}
+    			if(zqd_gr(sudoku,0)&&zqd_gr(sudoku,1)&&star(sudoku)){
+    				printf("Right\n");
+    			}else{
+    				printf("Wrong\n");
+    			}		
+    		}
+    		return 0;
+    	}
+    	int zqd_gr(int sudoku[9][9],int o){
+    		int orz = 1;
+    		int n;
+    		for (int i = 0;i < 9;i++){
+    			char kirby[10] = {0}; 
+    			for (int j = 0;j < 9;j++){
+    				if (o){
+    					n = sudoku[i][j];
+    				}else{
+    					n = sudoku[j][i];
+    				}
+    				if (strchr(kirby,n + '0')){
+    					orz = 0;
+    					return orz;
+    				}
+    				kirby[j] = n + '0';
+    			}
+    		}
+    		return orz;
+    	}
+    	int star(int sudoku[9][9]){
+    		char kirby[10];
+    		int orz = 1;
+    		for (int i = 0;i < 9;i += 3){
+    			for (int j = 0;j < 9;j += 3){
+    				for (int h = 0;h < 10;h++){
+    					kirby[h] = 0;
+    				}
+    				int o = 0;
+    				for (int r = i;r - i < 3;r++){
+    					for (int k = j;k - j < 3;k++){
+    						if (strchr(kirby,sudoku[r][k] + '0')&&orz){
+    							orz = 0;
+    							return orz;
+    						}
+    						kirby[o++] = sudoku[r][k] + '0';
+    					}		
+    				}
+    			}
+    		}
+    		return 1;
+    	}
