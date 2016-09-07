@@ -1,0 +1,36 @@
+    #include<stdio.h>
+    	int main(){
+    		int V,N;
+    		scanf("%d %d",&V,&N);
+    		struct zqd{
+    			int V;
+    			int W;
+    			double W_V;
+    		}gr[N],t;
+    		double min = 100000;
+    		for (int i = 0;i < N;i++){
+    			scanf("%d %d",&gr[i].V,&gr[i].W);
+    			gr[i].W_V = gr[i].W * 1.0 / gr[i].V;
+    			if (gr[i].W_V < min){
+    				min = gr[i].W_V;
+    			}
+    		}
+    		int worth = 0;
+    		int j = 0;
+    		while (min < V){
+    			for (int i = N - 1 - j;i >= 0;i--){
+    				if (gr[i].W_V < gr[i + 1].W_V){
+    					t = gr[i];
+    					gr[i] = gr[i + 1];
+    					gr[i + 1] = t;
+    				}
+    			}
+    			if (V >= gr[j].V){
+    				worth += (V / gr[j].V) * gr[j].W;
+    				V %= gr[j].V;
+    			}
+    			j++;
+    		}
+    		printf("%d",worth);
+    		return 0;
+    	}
