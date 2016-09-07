@@ -1,0 +1,34 @@
+    #include<stdio.h>
+    	int main(){
+    		int money[100000] = {0};
+    		int moneyt[100000] = {0};
+    		char n;
+    		int cnt = 99999;
+    		int test = 2;
+    		while (test--){
+    			while ((n = getchar()) != '\n'){
+    				money[cnt] = n - '0';		
+    				cnt--;
+    			}
+    			int t = 99999;
+    			while (cnt < 99999){
+    				moneyt[t] += money[cnt++ + 1];
+    				if (moneyt[t] >= 10){
+    					moneyt[t] -= 10;
+    					moneyt[t - 1]++;
+    				}
+    //				printf("%d",moneyt[cnt + 1]);
+    				t--;
+    			}
+    		}
+    		int flag = 1;
+    		for (int i = 0;i < 100000;i++){
+    			if (flag&&moneyt[i] == 0){
+    				continue;
+    			}else{
+    				flag = 0;
+    			}
+    			printf("%d",moneyt[i]);
+    		}
+    		return 0;
+    	}
