@@ -1,1 +1,60 @@
-
+    #include<stdio.h>
+            int main(){
+                int L,W;
+                scanf("%d %d",&L,&W);
+                int Old_Wang[L][W];
+                for (int i = 0;i < L;i++){
+                    for (int j = 0;j < W;j++){
+                        scanf("%d",&Old_Wang[i][j]);
+                    }
+                }
+                int had,a_farm;
+                int p = 0;
+                scanf("%d %d",&had,&a_farm);
+                int kirby[W - a_farm + 1];
+                for (int i = 0;i < had;i++){
+                    for(int j = 0;j < a_farm;j++){
+                        p += Old_Wang[i][j];
+                    }
+                }
+                int max = p;
+                kirby[0] = p;
+                for (int j = 0;j < W - a_farm;j++){
+                    int shu = 0;
+                    for (int i = 0;i < had;i++){
+                        shu -= Old_Wang[i][j];
+                        shu += Old_Wang[i][j + a_farm];
+                    }
+                    p += shu;
+                    kirby[j + 1] = p;
+                    if (p > max){
+                        max = p;
+                    }
+                }
+                p = kirby[0];
+                for (int i = 0;i < L - had;i++){
+                    int heng = 0;
+                    for (int j = 0;j < a_farm;j++){
+                        heng -= Old_Wang[i][j];
+                        heng += Old_Wang[i + had][j];                
+                    }
+                    p += heng;
+                    if (p > max){
+                        max = p;
+                    }
+                    int q = p;
+                    int k = q;
+                    for (int r = 0;r < W - a_farm;r++){
+                        q += kirby[r + 1] + Old_Wang[i][r] + Old_Wang[i + had][r + a_farm];
+                        q -= Old_Wang[i][r + a_farm] + Old_Wang[i + had][r] + kirby[r];
+                        kirby[r] = k;
+                        k = q;
+                        if (q > max){
+                            max = q;
+                        }
+                    }
+                    kirby[W - a_farm] = k;
+                }
+                printf("%d",max);
+                return 0;
+            }
