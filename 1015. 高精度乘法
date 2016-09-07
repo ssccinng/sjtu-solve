@@ -1,0 +1,56 @@
+    #include<stdio.h>
+    	int main(){
+    		int money1[500] = {0};
+    		int money2[500] = {0};
+    		int money1t[500] = {0};
+    		int money2t[500] = {0};
+    		int moneyt[1000] = {0};
+    		char n;
+    		int cnt = 499;
+    		while ((n = getchar()) != '\n'){
+    			money1[cnt] = n - '0';		
+    			cnt--;
+    		}
+    		int t = 499;
+    		while (cnt < 499){
+    			money1t[t] = money1[cnt + 1];
+    			cnt++; 
+    			t--; 
+    		}
+    //		for (int i = 0;i < 500;i++){
+    //			printf("%d",money1t[i]);
+    //		}
+    		while ((n = getchar()) != '\n'){
+    			money2[cnt] = n - '0';		
+    			cnt--;
+    		}
+    		t = 499;
+    		while (cnt < 499){
+    			money2t[t] = money2[cnt + 1];
+    			cnt++;
+    			t--;
+    		}
+    //		for (int i = 0;i < 500;i++){
+    //			printf("%d",money2t[i]);
+    //		}
+    		for (int i = 499;i >= 0;i--){
+    			for (int j = 499;j >= 0;j--){	 
+    				moneyt[j + i + 1] += money1t[i] * money2t[j];
+    				if (moneyt[j + i + 1] >= 10){
+    					int n = moneyt[j + i + 1] / 10;
+    					moneyt[j + i + 1] %= 10;
+    					moneyt[j + i] += n;
+    				}
+    				}
+    			}
+    		int flag = 1;
+    		for (int i = 0; i < 1000;i++){
+    			if (flag&&moneyt[i] == 0){
+    				continue;
+    			}else{
+    				flag = 0;
+    			}
+    			printf("%d",moneyt[i]);
+    		}
+    		return 0;
+    	}
