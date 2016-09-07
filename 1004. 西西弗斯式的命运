@@ -1,0 +1,21 @@
+    #include<stdio.h>
+    	int main(){
+    		int M,T,U,F,D;
+    		scanf("%d %d %d %d %d",&M,&T,&U,&F,&D);
+    		int time = 0;
+    		int cnt = 0;
+    		char n;
+    		while (time < M){
+    			scanf("%c",&n);
+    			if (n == 'u'||n == 'd'){
+    				time += U + D;
+    				cnt++;
+    			}else if (n == 'f')
+    				{
+    				time += 2 * F;
+    				cnt++;
+    				}
+    		}
+    		printf("%d",cnt - 1);
+    		return 0;
+    	}
