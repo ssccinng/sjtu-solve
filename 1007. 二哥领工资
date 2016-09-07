@@ -1,0 +1,46 @@
+    #include<stdio.h>
+    	int main(){
+    		int money[200] = {0};
+    		int moneyt[200] = {0};
+    		char n;
+    		int cnt = 199;
+    		int test = 2;
+    		while (test--){
+    			while ((n = getchar()) != '\n'){
+    				if (n == '.'){
+    					continue;
+    				}
+    				money[cnt] = n - '0';		
+    //				moneyt[199 - cnt] += money[cnt];
+    //				if (moneyt[199 - cnt] >= 10){
+    //					moneyt[199 - cnt] -= 10;
+    //					moneyt[198 - cnt]++;
+    //				}
+    //				printf("%d",money[cnt]);
+    				cnt--;
+    			}
+    			int t = 199;
+    			while (cnt < 199){
+    				moneyt[t] += money[cnt++ + 1];
+    				if (moneyt[t] >= 10){
+    					moneyt[t] -= 10;
+    					moneyt[t - 1]++;
+    				}
+    //				printf("%d",moneyt[cnt + 1]);
+    				t--;
+    			}
+    		}
+    		int flag = 1;
+    		for (int i = 0;i < 200;i++){
+    			if (flag&&moneyt[i] == 0){
+    				continue;
+    			}else{
+    				flag = 0;
+    			}
+    			printf("%d",moneyt[i]);
+    			if (i == 197){
+    				printf(".");
+    			}
+    		}
+    		return 0;
+    	}
